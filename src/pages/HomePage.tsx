@@ -5,15 +5,16 @@ import OpenSearch from "../components/OpenSearch";
 import BooksShelf from "../components/BooksShelf";
 import ShelfTypes from "../shared/enums/ShelfTypes.enum";
 import * as BooksAPI from "../BooksAPI";
+import { BookCardModel } from "../shared/models/my-reads-models.model";
 
 const HomePage = () => {
 
-    const [currentlyReadingBooksShelf, setCurrentlyReadingBooksShelf] = useState([]);
-    const [allBooksShelfs, setAllBooksShelfs] = useState([]);
-    const [wantToReadBooksShelf, setWantToReadBooksShelf] = useState([]);
-    const [readBooksShelf, setReadBooksShelf] = useState([]);
+    const [currentlyReadingBooksShelf, setCurrentlyReadingBooksShelf] = useState<(BookCardModel | never)[]>([]);
+    const [allBooksShelfs, setAllBooksShelfs] = useState<(BookCardModel | never)[]>([]);
+    const [wantToReadBooksShelf, setWantToReadBooksShelf] = useState<(BookCardModel | never)[]>([]);
+    const [readBooksShelf, setReadBooksShelf] = useState<(BookCardModel | never)[]>([]);
 
-    const setAllShelfs = (allShelfs) => {
+    const setAllShelfs = (allShelfs: BookCardModel[]) => {
         setAllBooksShelfs(allShelfs);
         setCurrentlyReadingBooksShelf(allShelfs.filter((Shelf) => Shelf.shelf === ShelfTypes.CURRENTLY_READING));
         setWantToReadBooksShelf(allShelfs.filter((Shelf) => Shelf.shelf === ShelfTypes.WANT_TO_READ));
@@ -29,9 +30,10 @@ const HomePage = () => {
         getAllBooks();
     }, []);
 
-    const updateShelfs = (bookId, newShelf) => {
-        
-        allBooksShelfs.find((book) => book.id === bookId).shelf = newShelf;
+    const updateShelfs = (bookId: string, newShelf: string) => {
+
+        allBooksShelfs.filter((book) => book.id === bookId)[0].shelf = newShelf;
+
         setAllShelfs(allBooksShelfs);
     }
 
