@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import * as BooksAPI from "../BooksAPI";
 import BookCard from "../components/BookCard";
 import ShelfTypes from "../shared/enums/ShelfTypes.enum";
+import { BookCardModel } from "../shared/models/my-reads-models.model";
 
 const SearchPage = () => {
 
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState<(BookCardModel | never)[]>([]);
   const [wantTogetYourBooks, setWantTogetYourBooks] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [myBooks, setMyBooks] = useState([]);
+  const [myBooks, setMyBooks] = useState<(BookCardModel | never)[]>([]);
 
   useEffect(() => {
     const getAllBooks = async () => {
@@ -21,7 +22,7 @@ const SearchPage = () => {
       }
     };
 
-    const mapSearchResultShelfs = (result) => {
+    const mapSearchResultShelfs = (result: BookCardModel[]) => {
       return result && result.length && (result.map((book) => {
         const usedBook = myBooks.find((b) => b.id === book.id);
         book.shelf = usedBook && usedBook.shelf ? usedBook.shelf : ShelfTypes.NONE;
@@ -32,10 +33,10 @@ const SearchPage = () => {
 
     getAllBooks();
 
-    const searchForBooks = async (query, maxResult) => {
+    const searchForBooks = async (query: string, maxResult: number) => {
       const res = await BooksAPI.search(query, maxResult);
       const checkedResponse = Array.isArray(res) ? res : res.items;
-      const mappedSearchResult = mapSearchResultShelfs(checkedResponse);
+      const mappedSearchResult = mapSearchResultShelfs(checkedResponse) || [];
       setSearchResult(mappedSearchResult);
     };
 
@@ -44,9 +45,9 @@ const SearchPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
-  const updateMyBooksShelf = (updatedBook, newShelf) => {
+  const updateMyBooksShelf = (updatedBook: BookCardModel, newShelf: string) => {
     myBooks.find((b) => b.id === updatedBook.id) ?
-      myBooks.find((b) => b.id === updatedBook.id).shelf = newShelf :
+      myBooks.filter((b) => b.id === updatedBook.id)[0].shelf = newShelf :
       myBooks.push(updatedBook);
     setMyBooks(myBooks);
   }
