@@ -1,7 +1,7 @@
 /** BookCardProps */
 export interface BookCardProps {
     bookCard : BookCardModel;
-     onShelfChange: (id: BookCardModel|string, newShelf: string) => void;
+     onShelfChange: (id: BookCardModel, newShelf: string) => void;
 }
 
 /** BookCardModel */
