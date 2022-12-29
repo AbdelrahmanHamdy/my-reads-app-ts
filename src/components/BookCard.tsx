@@ -23,7 +23,7 @@ const BookCard: React.FC<BookCardProps> = (props: BookCardProps) => {
         setMode("reload");
         window.location.pathname === '/search' ?
         props.onShelfChange(props.bookCard, newShelf) :
-        props.onShelfChange(book.id, newShelf);
+        props.onShelfChange(book, newShelf);
     };
 
     return (

@@ -16,7 +16,7 @@ const BooksShelf = (props: BooksShelfProps) => {
             <div className="bookshelf-books">
                 <ol className="books-grid">
 
-                    {props.shelf.map((book) => <BookCard key={book.id} bookCard={book} onShelfChange={(bookId, newShelf) => {props.emitShelfChange(bookId as string, newShelf)}}/>)}
+                    {props.shelf.map((book) => <BookCard key={book.id} bookCard={book} onShelfChange={(book, newShelf) => {props.emitShelfChange(book.id, newShelf)}}/>)}
 
                 </ol>
             </div>
