@@ -10,7 +10,7 @@ describe('Header tests', () => {
         const mainDiv = container.getElementsByClassName('list-books-title');
 
         expect(mainDiv).toBeDefined();
-        expect(screen.getByText(/MyReads/i)).toBeInTheDocument()
+        expect(screen.getByText(/MyReads/i)).toBeInTheDocument();
     });
 
 });
