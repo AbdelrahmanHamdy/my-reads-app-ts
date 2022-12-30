@@ -1,7 +1,7 @@
 /** BookCardProps */
 export interface BookCardProps {
-    bookCard : BookCardModel;
-     onShelfChange: (id: BookCardModel, newShelf: string) => void;
+    bookCard: BookCardModel;
+    onShelfChange: (book: BookCardModel, newShelf: string) => void;
 }
 
 /** BookCardModel */
@@ -20,14 +20,14 @@ export interface BookCardModel {
     authors: string[];
 
     /** imageLinks */
-    imageLinks:ImgLinksModel;
+    imageLinks: ImgLinksModel;
 }
 
 /** ImgLinksModel */
 export interface ImgLinksModel {
 
     /** thumbnail */
-    thumbnail :string
+    thumbnail: string
 
     /** smallThumbnail */
     smallThumbnail: string
