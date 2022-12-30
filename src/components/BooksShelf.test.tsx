@@ -36,7 +36,7 @@ describe('BooksShelf tests', () => {
         expect(mainDiv).toBeDefined();
         expect(bookCards).toBeDefined();
         expect(bookCards.length).toEqual(1);
-        expect(screen.getAllByAltText(/Mehul Bhatt/i)).toBeInTheDocument()
+        expect(screen.getByText(/Mehul Bhatt/i)).toBeInTheDocument()
     });
 
 });
