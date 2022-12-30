@@ -29,8 +29,8 @@ describe('BooksShelf tests', () => {
                 id: "sJf1vQAACAAJ",
                 shelf: "currentlyReading"
             }]} shelfTitle={"want to read"} />);
-            const mainDiv = container.getElementsByClassName('bookshelf-title');
 
+        const mainDiv = container.getElementsByClassName('bookshelf-title');
         const bookCards = container.getElementsByClassName('book');
 
         expect(mainDiv).toBeDefined();
