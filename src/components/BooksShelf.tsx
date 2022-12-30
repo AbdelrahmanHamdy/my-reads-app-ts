@@ -1,11 +1,12 @@
 
+import { BookCardModel } from "../shared/models/my-reads-models.model";
 import BookCard from "./BookCard";
 
 
 /** BooksShelfProps */
  interface BooksShelfProps {
     shelfTitle: string;
-     shelf: any[];
+     shelf: BookCardModel[];
      emitShelfChange: (bookId: string, newShelf: string) => void;
  }
 
